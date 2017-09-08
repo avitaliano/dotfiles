@@ -16,9 +16,9 @@ RUST_SRC_PATH=~/code/sources/rust/src
 
 # java stuff
 export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
-export JAVA_7_HOME=$(/usr/libexec/java_home -v1.7)
+#export JAVA_7_HOME=$(/usr/libexec/java_home -v1.7)
 alias java7='export JAVA_HOME=$JAVA_7_HOME && mountpath'
-alias java8='export JAVA_HOME=$JAVA_8_HOME && mountpath'
+#alias java8='export JAVA_HOME=$JAVA_8_HOME && mountpath'
 export JAVA_HOME=$JAVA_8_HOME
 
 mountpath () {
