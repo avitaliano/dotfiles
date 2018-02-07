@@ -1,5 +1,6 @@
 #!/usr/bin/env zsh
 # author: Filipe Silva (ninrod)
+# modified by: Arnaldo Vitaliano (avitaliano)
 
 SCRIPTPATH=$(cd $(dirname $0); pwd -P) && cd $SCRIPTPATH
 GIT_ROOT=$(git rev-parse --show-toplevel)
@@ -16,7 +17,6 @@ source ~/.options/shell-options.zsh gitmask
 
 source $GIT_ROOT/boot/zsh-deps.zsh
 source $GIT_ROOT/boot/vim-deps.zsh
-source $GIT_ROOT/boot/emacs-deps.zsh
 source $GIT_ROOT/boot/other-deps.zsh
 
 source ~/.options/shell-options.zsh setup
