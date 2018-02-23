@@ -2,7 +2,7 @@
 
 # ls
 alias ls='ls --color=auto --group-directories-first -X'
-alias l='ls -lh'
+alias l='ls -lhrt'
 alias la='l -A'
 alias lk='k -A --no-vcs'
 alias ld='lk -d'
@@ -13,7 +13,7 @@ alias c='clear'
 alias q='exit'
 alias b='builtin cd ..'
 
-alias w='echo -e "$Blue ${"$(pwd)"/$HOME/~} ${Red}at ${Cyan}$(whoami)${Red}@${Yellow}$(hostname -s)$Red \
+alias w='echo -e "$Cyan ${"$(pwd)"/$HOME/~} ${Red}at ${Cyan}$(whoami)${Red}@${Yellow}$(hostname -s)$Red \
 using $Yellow${0}$Purple ${DOT_PROMPT_CHAR:-$}${Rst}"'
 
 # apps
