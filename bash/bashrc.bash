@@ -56,6 +56,7 @@ alias vv='v ~/.vimrc'
 alias vz='v ~/.bashrc'
 
 alias w='echo -e "$Blue $PWD ${Red}at ${Cyan}$(whoami)${Red}@${Yellow}$(hostname -s)$Red in $Yellow${0}$Purple \$"'
+alias z="zsh"
 
 # git {{{
 
@@ -101,7 +102,7 @@ md () {
 # }}}
 # prompt {{{
 
-export PS1="${Blue}\w ${Red}\u${Cyan}@${Yellow}\h ${Purple}#${Rst} "
+export PS1="${Cyan}\w ${Red}\u${Cyan}@${Yellow}\h ${Purple}#${Rst} "
 
 # }}}
 # user last step {{{
