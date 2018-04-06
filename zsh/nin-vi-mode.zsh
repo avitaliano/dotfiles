@@ -17,21 +17,23 @@ bindkey -v
 # same as vim c+motion (change inside/around text-object).
 autoload -U select-bracketed
 zle -N select-bracketed
-for m in visual viopp; do
-  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
-    bindkey -M $m $c select-bracketed
-  done
-done
+# comentado por arnaldo. falhou ao iniciar zsh no ubuntu for windows 10
+#for m in visual viopp; do
+#  for c in {a,i}${(s..)^:-'()[]{}<>bB'}; do
+#    bindkey -M $m $c select-bracketed
+#  done
+#done
 
 # using select-quoted as instructed on: https://github.com/zsh-users/zsh/blob/master/Functions/Zle/select-quoted#L6
 # expands c+motion (change inside/around + text-object) to quotes.
 autoload -U select-quoted
 zle -N select-quoted
-for m in visual viopp; do
-  for c in {a,i}{\',\",\`}; do
-    bindkey -M $m $c select-quoted
-  done
-done
+# comentado por arnaldo. falhou ao iniciar zsh no ubuntu for windows 10
+#for m in visual viopp; do
+#  for c in {a,i}{\',\",\`}; do
+#    bindkey -M $m $c select-quoted
+#  done
+#done
 
 # }}}
 # simple binds {{{

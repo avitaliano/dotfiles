@@ -6,8 +6,8 @@ alias gi='builtin cd $(git rev-parse --show-toplevel)'
 alias gd='git diff'
 alias gds='git diff --staged'
 alias gal='git add -A'
-ealias ga='git add'
-ealias gc='git commit -m'
+alias ga='git add'
+alias gc='git commit -m'
 
 # sync
 alias gf='git fetch'
@@ -23,7 +23,7 @@ ealias gco='git checkout'
 
 # log
 alias git_log_custom='git log --pretty=format:"%C(yellow)%h%Creset %C(cyan)%>(14)%ad%Creset %C(magenta)%<(7)%an%Creset %C(blue)%d%Creset %C(white)%s%Creset" --abbrev=7 '
-alias gld='git_log_custom --graph --date=format:"%Y-%m-%d %H:%M:%S"'
+alias gld='git_log_custom --graph --date=iso'
 alias gl='gld --date=relative'
 alias gla='gld --date=relative --all'
 alias glnc='git log --no-color'

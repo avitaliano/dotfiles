@@ -8,7 +8,7 @@ build_prompt_char() {
 }
 
 # default: showing whoami@hostname without truncation
-PROMPT="%F{blue}%1~%f %F{cyan}%n%f%F{red}@%f%F{yellow}%m%f $(build_prompt_char) "
+PROMPT="%F{cyan}%1~%f %F{cyan}%n%f%F{red}@%f%F{yellow}%m%f $(build_prompt_char) "
 
 PROMPT_INFO_LEVEL=$SHELL_PROMPT_INFO_LEVEL
 
