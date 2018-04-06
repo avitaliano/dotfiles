@@ -10,8 +10,8 @@ source ~/.zsh.d/functions.zsh
 source ~/.zsh.d/alias.zsh
 source ~/.zsh.d/alias-git.zsh
 source ~/.zsh.d/alias-dir.zsh
-source ~/.zsh.d/alias-docker.zsh
-source ~/.zsh.d/alias-emacs.zsh
+#source ~/.zsh.d/alias-docker.zsh
+#source ~/.zsh.d/alias-emacs.zsh
 source ~/.zsh.d/alias-vim.zsh
 source ~/.zsh.d/prompt.zsh
 source ~/.zsh.d/ninplug.zsh
