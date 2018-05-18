@@ -3,6 +3,7 @@
 # ls
 alias ls='ls --color=auto --group-directories-first -X'
 alias l='ls -lhrt'
+alias ll='ls -lh'
 alias la='l -A'
 alias lk='k -A --no-vcs'
 alias ld='lk -d'
@@ -29,3 +30,7 @@ alias dot='la $(find ~ -maxdepth 1 -type l)'
 # dotfiles
 alias r='~/.dotfiles/install.zsh'
 alias t='tmux new-session -A -s tmux -n shell'
+
+# dirs
+alias d=show_and_choose
+alias 1='cd +1'

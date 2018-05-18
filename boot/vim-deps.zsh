@@ -20,6 +20,10 @@ ningrab kana/vim-textobj-entire
 ningrab morhetz/gruvbox
 ningrab itchyny/lightline.vim
 
+# buffers, file support
+ningrab junegunn/fzf.vim
+ningrab junegunn/fzf
+
 # pathogen installation
 PATHOGEN_FILE=$vim_deps/tpope/vim-pathogen/autoload/pathogen.vim
 AUTOLOAD_DIR=~/.vim/autoload
