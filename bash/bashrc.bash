@@ -111,6 +111,9 @@ md () {
 export PS1="${Cyan}\w ${Red}\u${Cyan}@${Yellow}\h ${Purple}#${Rst} "
 
 # }}}
+# switch to zsh if available
+[[ -z "$ZSH_VERSION" && -x "$(command -v zsh)" ]] && exec zsh -l
+
 # user last step {{{
 
 LAST_STEP=~/.options/last-step.zsh

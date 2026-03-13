@@ -1,5 +1,8 @@
 # -*- mode: sh -*-
 
+# bail out if not running in zsh
+[[ -z "$ZSH_VERSION" ]] && return 0
+
 source ~/.zsh.d/constants.zsh
 source ~/.zsh.d/envbootstrap.zsh
 source ~/.zsh.d/options.zsh
