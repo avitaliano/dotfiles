@@ -20,7 +20,7 @@ fi
 # plugins {{{
 
 # colors for GNU ls (from coreutils)
-eval `dircolors ~/.lscolors`
+command -v dircolors &>/dev/null && eval $(dircolors ~/.lscolors)
 
 # }}}
 # terminal colors {{{

@@ -27,7 +27,7 @@ load_plugins
 source ~/.zsh.d/completions.zsh
 
 # colors for GNU ls (from coreutils)
-eval $(dircolors ~/.lscolors)
+(( $+commands[dircolors] )) && eval $(dircolors ~/.lscolors)
 
 # bootstrat fzf
 source ~/.zsh.d/fzf.zsh
