@@ -47,7 +47,11 @@ alias t='tmux new-session -A -s tmux -n shell'
 
 alias l='ls -lh'
 alias la='l -A'
-alias ls='ls --color=auto --group-directories-first -X'
+if [[ "$OSTYPE" == darwin* ]]; then
+  alias ls='ls -G'
+else
+  alias ls='ls --color=auto'
+fi
 
 alias dot='la `find ~ -maxdepth 1 -type l`'
 alias dot-push='cd ~/dotfiles && git bundle create ~/gdrive/dotfiles.bundle master'
