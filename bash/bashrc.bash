@@ -9,8 +9,12 @@ stty -echoctl
 # }}}
 # path {{{
 
-PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
-export PATH
+[[ -f ~/.options/local-settings ]] && source ~/.options/local-settings
+
+if [[ -z "$DOTFILES_SKIP_PATH_INIT" ]]; then
+  PATH="/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin"
+  export PATH
+fi
 
 # }}}
 # plugins {{{

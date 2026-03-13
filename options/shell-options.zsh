@@ -3,6 +3,9 @@ if [[ -n ${1+x} ]] && [[ "$1" == "gitmask" ]]; then
   return
 fi
 
+# Local machine settings
+[[ -f ~/.options/local-settings ]] && source ~/.options/local-settings
+
 load_secrets() {
   local my_secrets=$(cd $GIT_ROOT && cd .. && readlink -f secrets)
   if [[ ! -d $my_secrets ]]; then
