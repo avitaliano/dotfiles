@@ -34,4 +34,4 @@ source ~/.zsh.d/fzf.zsh
 source ~/.zsh.d/zshenv.zsh
 
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh || true

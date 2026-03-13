@@ -40,4 +40,4 @@ export MANPATH
 # node version manager
 
 export NVM_DIR="$HOME/.nvm"
-[[ -e $NVM_DIR/nvm.sh ]] && source $NVM_DIR/nvm.sh
+[[ -e $NVM_DIR/nvm.sh ]] && source $NVM_DIR/nvm.sh || true
