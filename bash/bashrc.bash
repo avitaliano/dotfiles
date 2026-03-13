@@ -50,6 +50,7 @@ alias la='l -A'
 alias ls='ls --color=auto --group-directories-first -X'
 
 alias dot='la `find ~ -maxdepth 1 -type l`'
+alias dot-sync='cd ~/dotfiles && git pull gdrive master && git push gdrive master'
 
 alias tarc='tar -zcvf file.tar.gz'
 alias tarx='tar -zxvf'
