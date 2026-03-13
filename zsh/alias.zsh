@@ -1,7 +1,7 @@
 # -*- mode: sh -*-
 
 # ls
-alias ls='ls --color=auto --group-directories-first -X'
+alias ls='ls --color=auto '
 alias l='ls -lhrt'
 alias ll='ls -lh'
 alias la='l -A'
