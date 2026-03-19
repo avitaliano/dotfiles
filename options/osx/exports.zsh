@@ -8,7 +8,13 @@ GIT_SCRIPTS=$CUSTOM_SCRIPTS_BASE/git
 OSX_SCRIPTS=~/.options/osx/scripts
 
 CUSTOM_SCRIPTS=$EMACS_SCRIPTS:$ZSH_SCRIPTS:$VIM_SCRIPTS:$OSX_SCRIPTS:$GIT_SCRIPTS
-GNUBIN_PATH=/usr/local/opt/coreutils/libexec/gnubin
+if [[ -d /opt/homebrew ]]; then
+  HOMEBREW_BIN=/opt/homebrew/bin
+  GNUBIN_PATH=/opt/homebrew/opt/coreutils/libexec/gnubin
+else
+  HOMEBREW_BIN=
+  GNUBIN_PATH=/usr/local/opt/coreutils/libexec/gnubin
+fi
 
 # Rust stuff
 CARGO_BIN=~/.cargo/bin
@@ -23,6 +29,7 @@ fi
 
 mountpath () {
   PATH="/bin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin"
+  [[ -d "$HOMEBREW_BIN" ]] && PATH="$HOMEBREW_BIN:$PATH"
   PATH="$CUSTOM_SCRIPTS:$PATH"
   PATH="$GNUBIN_PATH:$PATH"
   PATH="$JAVA_HOME/bin:$PATH"
@@ -33,7 +40,11 @@ mountpath () {
 mountpath
 
 # manpath
-GNUMANPATH="/usr/local/opt/coreutils/libexec/gnuman"
+if [[ -d /opt/homebrew ]]; then
+  GNUMANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman"
+else
+  GNUMANPATH="/usr/local/opt/coreutils/libexec/gnuman"
+fi
 MANPATH="$GNUMANPATH:$MANPATH"
 export MANPATH
 
