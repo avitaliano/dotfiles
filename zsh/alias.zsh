@@ -1,10 +1,10 @@
 # -*- mode: sh -*-
 
 # ls
-if [[ "$OSTYPE" == darwin* ]]; then
-  alias ls='ls -G'
-else
+if ls --color=auto /dev/null &>/dev/null 2>&1; then
   alias ls='ls --color=auto'
+else
+  alias ls='ls -G'
 fi
 alias l='ls -lhrt'
 alias ll='ls -lh'
