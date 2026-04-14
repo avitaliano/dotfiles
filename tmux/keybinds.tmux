@@ -17,17 +17,15 @@ set -g prefix C-Space
 bind-key p last-window
 
 bind Space copy-mode
-bind r next-layout
+bind r source ~/.tmux.conf \; display "Config reloaded"
+bind b previous-window
 
-# Vim style bindings for pane movement
-bind-key -r h select-pane -L
-bind-key -r j select-pane -D
-bind-key -r k select-pane -U
-bind-key -r l select-pane -R
+# splits: h = horizontal (side-by-side), v = vertical (top/bottom)
+bind-key h split-window -h
+bind-key v split-window -v
 
-# vim splits
-bind-key y split-window -h
-bind-key x split-window -v
+# restore kill-pane (default prefix x)
+bind-key x confirm-before -p "kill-pane #P? (y/n)" kill-pane
 
 # moving panes
 bind-key g command-prompt -p "join pane from:"  "join-pane -s '%%'"
@@ -42,12 +40,9 @@ bind-key = select-layout even-vertical
 bind-key | select-layout even-horizontal
 
 # ditched m which had select-pane -m
-# this place a stronger visual cue on the selected pane
-# add bind for mouse support toggle needs tmux 2.2
-bind-key m set -g mouse
+# re-bound to mark pane (useful for swap-pane)
+bind-key m select-pane -m
 
-# toggles tmux bar on/off
-bind-key - set status
 
 #### directly bind function keys
 # fast window selection
@@ -71,8 +66,7 @@ bind -n F9 next-layout
 # rotate through different pre set layouts
 bind -n F10 copy-mode
 
-# mouse support toggle needs tmux 2.2
-bind -n F11 set -g mouse
+# F11 unbound (mouse is always on, see options.tmux)
 
 # toggles tmux bar on/off
 bind-key -n F12 set status
@@ -83,8 +77,3 @@ bind -n M-Right select-pane -R
 bind -n M-Up select-pane -U
 bind -n M-Down select-pane -D
 
-# create panes with <C-arrow> prefix
-bind -n C-M-Left split-window -h
-bind -n C-M-Right split-window -h
-bind -n C-M-Up split-window -v
-bind -n C-M-Down split-window -v
