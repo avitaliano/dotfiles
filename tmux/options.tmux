@@ -18,3 +18,6 @@ set -g history-limit 30000
 
 # Renumber windows automatically after removing a window
 set-option -g renumber-windows on
+
+# Mouse support (always on)
+set -g mouse on
