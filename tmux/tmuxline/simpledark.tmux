@@ -1,25 +1,19 @@
 # This tmux statusbar config was created by tmuxline.vim
-# on Tue, 01 Nov 2016
-# Updated for tmux 3.2+ (replaced deprecated -fg/-bg/-attr with -style)
+# Updated for tmux 3.x style syntax (2026-04-14)
 
-set -g status-bg "#202020"
+set -g status-style "bg=#202020,none"
 set -g status-justify "left"
 set -g status-left-length "100"
 set -g status "on"
 set -g status-right-length "100"
-
+set -g status-left-style "none"
 set -g message-style "fg=#b0b0b0,bg=#303030"
 set -g message-command-style "fg=#b0b0b0,bg=#303030"
 set -g pane-active-border-style "fg=#ff3030"
 set -g pane-border-style "fg=#404040"
-set -g status-style "none"
-set -g status-left-style "none"
-set -g status-right-style "none"
-
 setw -g window-status-style "fg=#505050,bg=#202020,none"
 setw -g window-status-activity-style "fg=#505050,bg=#202020,none"
 setw -g window-status-separator ""
-
 set -g status-left "#[fg=#505050,bg=#202020] #S #[fg=#202020,bg=#202020,nobold,nounderscore,noitalics]"
 set -g status-right "#[fg=#202020,bg=#202020,nobold,nounderscore,noitalics]#[fg=#505050,bg=#202020] %Y-%m-%d | %H:%M #[fg=#202020,bg=#202020,nobold,nounderscore,noitalics]#[fg=#505050,bg=#202020] #h "
 setw -g window-status-format "#[fg=#505050,bg=#202020] #I |#[fg=#505050,bg=#202020] #W "
