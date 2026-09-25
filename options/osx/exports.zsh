@@ -52,3 +52,10 @@ export MANPATH
 
 export NVM_DIR="$HOME/.nvm"
 [[ -e $NVM_DIR/nvm.sh ]] && source $NVM_DIR/nvm.sh || true
+
+# The following lines were added by Docker Desktop to add commands to your PATH.
+export PATH="$PATH:/Users/service/.docker/bin"
+# End of Docker Desktop section.
+
+eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+
