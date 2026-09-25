@@ -3,12 +3,12 @@
 
 build_prompt_char() {
   local pc="$DOT_PROMPT_CHAR"
-  local prompt_char="%(?.%F{magenta}.%F{red})${pc:-$}%f"
+  local prompt_char="%(?.%F{magenta}.%F{red})${pc:->}%f"
   echo -n "$prompt_char"
 }
 
-# default: showing whoami@hostname without truncation
-PROMPT="%F{cyan}%1~%f %F{cyan}%n%f%F{red}@%f%F{yellow}%m%f $(build_prompt_char) "
+# default: user@server:path>
+PROMPT="%F{cyan}%n%f%F{red}@%f%F{yellow}%m%f:%F{blue}%~%f$(build_prompt_char) "
 
 PROMPT_INFO_LEVEL=$SHELL_PROMPT_INFO_LEVEL
 

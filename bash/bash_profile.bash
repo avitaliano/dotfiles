@@ -7,3 +7,7 @@ fi
 if [[ $- == *i* && -f ~/.bashrc  ]]; then
   . ~/.bashrc
 fi
+
+
+# Added by Antigravity CLI installer
+export PATH="$HOME/.local/bin:$PATH"

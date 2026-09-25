@@ -112,7 +112,7 @@ md () {
 # }}}
 # prompt {{{
 
-export PS1="${Cyan}\w ${Red}\u${Cyan}@${Yellow}\h ${Purple}#${Rst} "
+export PS1="${Cyan}\u${Red}@${Yellow}\h${Rst}:${Blue}\w${Purple}>${Rst} "
 
 # }}}
 # switch to zsh if available
@@ -124,3 +124,7 @@ LAST_STEP=~/.options/last-step.zsh
 [[ -e $LAST_STEP ]] && source $LAST_STEP
 
 # }}}
+
+
+# Added by Antigravity CLI installer
+export PATH="$HOME/.local/bin:$PATH"
