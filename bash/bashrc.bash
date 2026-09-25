@@ -112,7 +112,7 @@ md () {
 # }}}
 # prompt {{{
 
-export PS1="${Cyan}\w ${Red}\u${Cyan}@${Yellow}\h ${Purple}#${Rst} "
+export PS1="${Cyan}\u${Red}@${Yellow}\h${Rst}:${Blue}\w${Purple}>${Rst} "
 
 # }}}
 # switch to zsh if available
