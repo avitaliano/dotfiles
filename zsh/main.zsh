@@ -38,3 +38,15 @@ source ~/.zsh.d/zshenv.zsh
 
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh || true
+
+# bun completions
+[ -s "/Users/arnaldo/.bun/_bun" ] && source "/Users/arnaldo/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+
+# Added by Antigravity CLI installer
+export PATH="/Users/arnaldo/.local/bin:$PATH"
+export PATH="/Users/arnaldo/.local/bin:$PATH"
