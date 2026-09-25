@@ -127,4 +127,4 @@ LAST_STEP=~/.options/last-step.zsh
 
 
 # Added by Antigravity CLI installer
-export PATH="/Users/arnaldo/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH"
