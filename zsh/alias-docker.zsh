@@ -1,66 +1,87 @@
-# ------------------------------------
-# Docker functions
-# ------------------------------------
+# -*- mode: sh -*-
 
-docker_alias_stop_all_containers() { docker stop $(docker ps -a -q); }
-docker_alias_remove_all_containers() { docker rm $(docker ps -a -q); }
-docker_alias_remove_all_empty_images() {docker images | awk '{print $2 " " $3}' | grep '^<none>' | awk '{print $2}' | xargs -I{} docker rmi {}; }
-docker_alias_docker_file_build() { docker build -t=$1 .; }
-docker_alias_show_all_docker_related_alias() { alias | grep 'docker' | sed "s/^\([^=]*\)=\(.*\)/\1 => \2/"| sed "s/['|\']//g" | sort; }
-docker_alias_bash_into_running_container() { docker exec -it $(docker ps -aqf "name=$1") bash; }
+# helpers: bulk operations. they hit every container, so each one shows what it
+# will touch and waits for confirmation. non-interactive shells always abort.
+docker_confirm() {
+  local prompt=$1 names=$2
+  if [[ ! -o interactive ]]; then
+    echo "refusing $prompt in a non-interactive shell" >&2
+    return 1
+  fi
+  print -l "$names" | sed 's/^/  /'
+  local reply
+  read -q "reply?$prompt the containers above? [y/N] " || { echo; return 1 }
+  echo
+}
 
-# ------------------------------------
-# Docker alias
-# ------------------------------------
+docker_stop_all() {
+  local ids=$(docker ps -q)
+  [[ -z $ids ]] && return 0
+  docker_confirm stop "$(docker ps --format '{{.Names}}')" || return 0
+  docker stop ${=ids}
+}
 
-# Stop all containers
-alias dstop='docker_alias_stop_all_containers'
+docker_remove_all() {
+  local ids=$(docker ps -aq)
+  [[ -z $ids ]] && return 0
+  docker_confirm "remove (and stop)" "$(docker ps -a --format '{{.Names}}')" || return 0
+  docker rm -f ${=ids}
+}
 
-# Remove all containers
-alias drm='docker_alias_remove_all_containers'
+docker_remove_exited() {
+  local ids=$(docker ps -aq --filter status=exited)
+  [[ -z $ids ]] && return 0
+  docker_confirm remove "$(docker ps -a --filter status=exited --format '{{.Names}}')" || return 0
+  docker rm ${=ids}
+}
 
-# Stop and Remove all containers
-alias drmf='docker stop $(docker ps -a -q) && docker rm $(docker ps -a -q)'
+# shell into a running container by name fragment, bash with sh fallback
+docker_shell() {
+  local id=$(docker ps -qf "name=$1")
+  if [[ -z $id ]]; then
+    echo "no running container matching: $1" >&2
+    return 1
+  fi
+  # probe rather than `bash || sh`: that falls through whenever bash exits non-zero
+  local shell=sh
+  docker exec $id sh -c 'command -v bash' &>/dev/null && shell=bash
+  docker exec -it $id $shell
+}
 
-# stop and remove all Exited containers
-alias drsc='docker rm $(docker ps -aq --filter status=exited)'
-
-# Docker remove image
-alias dri='docker rmi'
-
-# Remove all empty images
-alias drei='docker_alias_remove_all_empty_images'
-
-# Dockerfile build, e.g., $dbu tcnksm/test
-alias dbu='docker_alias_docker_file_build'
-
-# Show all alias related docker
-alias dalias='docker_alias_show_all_docker_related_alias'
-
-# Bash into running container
-alias dbash='docker_alias_bash_into_running_container'
-
-# Get latest container ID
-alias dl="docker ps -l -q"
-
+# containers
 alias dp='docker ps --format="table {{.ID}}\t{{.Names}}\t{{.Image}}\t{{.Status}}"'
-
-alias dclean='drmf && drei'
-
-# Get images
-alias di="docker images"
-
-# Get container IP
+alias dpa='dp -a'
+alias dl='docker ps -l -q'
+alias dstop='docker_stop_all'
+alias drm='docker_remove_all'
+alias drsc='docker_remove_exited'
+alias dbash='docker_shell'
+alias dex='docker exec -it'
+alias dlog='docker logs -f'
+alias dstats='docker stats --no-stream'
 alias dip="docker inspect --format '{{ .NetworkSettings.IPAddress }}'"
 
-# Run deamonized container, e.g., $dkd base /bin/echo hello
-alias dkd="docker run -d -P"
+# images
+alias di='docker images'
+alias dri='docker rmi'
+alias dbu='docker build -t'
 
-# Run interactive container, e.g., $dki base /bin/bash
-alias dki="docker run -i -t -P"
+# run
+alias dkd='docker run -d -P'
+alias dki='docker run -it -P'
+alias drit='docker run --rm -it'
 
-# Run interactive container and then auto kill it
-alias drit='docker run --rm -i -t'
+# compose
+alias dc='docker compose'
+alias dcu='docker compose up -d'
+alias dcd='docker compose down'
+alias dcb='docker compose build'
+alias dcl='docker compose logs -f'
+alias dcp='docker compose ps'
 
-# Execute interactive container, e.g., $dex base /bin/bash
-alias dex="docker exec -i -t"
+# cleanup
+alias dprune='docker system prune'
+alias dclean='docker_remove_all && docker image prune'
+
+# list every docker alias
+alias dalias="alias | grep -E \"^d[a-z]*='?docker\" | sed 's/=/ => /' | sort"
