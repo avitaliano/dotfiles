@@ -39,13 +39,6 @@ source ~/.zsh.d/zshenv.zsh
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh || true
 
-git config --global --add safe.directory /opt/dotfiles
-# The following lines were added by Docker Desktop to add commands to your PATH.
-export PATH="$PATH:/Users/service/.docker/bin"
-# End of Docker Desktop section.
-
-eval "$(/opt/homebrew/bin/brew shellenv zsh)"
-
 # bun completions
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 

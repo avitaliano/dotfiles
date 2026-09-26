@@ -8,13 +8,19 @@ GIT_SCRIPTS=$CUSTOM_SCRIPTS_BASE/git
 OSX_SCRIPTS=~/.options/osx/scripts
 
 CUSTOM_SCRIPTS=$EMACS_SCRIPTS:$ZSH_SCRIPTS:$VIM_SCRIPTS:$OSX_SCRIPTS:$GIT_SCRIPTS
+
+# homebrew: apple silicon lives in /opt/homebrew, intel in /usr/local
 if [[ -d /opt/homebrew ]]; then
-  HOMEBREW_BIN=/opt/homebrew/bin
-  GNUBIN_PATH=/opt/homebrew/opt/coreutils/libexec/gnubin
+  HOMEBREW_PREFIX=/opt/homebrew
 else
-  HOMEBREW_BIN=
-  GNUBIN_PATH=/usr/local/opt/coreutils/libexec/gnubin
+  HOMEBREW_PREFIX=/usr/local
 fi
+HOMEBREW_BIN=$HOMEBREW_PREFIX/bin
+GNUBIN_PATH=$HOMEBREW_PREFIX/opt/coreutils/libexec/gnubin
+GNUMANPATH=$HOMEBREW_PREFIX/opt/coreutils/libexec/gnuman
+
+# sets HOMEBREW_* env vars. mountpath below owns PATH, so run this first.
+[[ -x $HOMEBREW_BIN/brew ]] && eval "$($HOMEBREW_BIN/brew shellenv zsh)"
 
 # Rust stuff
 CARGO_BIN=~/.cargo/bin
@@ -23,7 +29,6 @@ RUST_SRC_PATH=~/code/sources/rust/src
 # java stuff
 if /usr/libexec/java_home -v1.8 &>/dev/null; then
   export JAVA_8_HOME=$(/usr/libexec/java_home -v1.8)
-  alias java7='export JAVA_HOME=$JAVA_7_HOME && mountpath'
   export JAVA_HOME=$JAVA_8_HOME
 fi
 
@@ -31,31 +36,19 @@ mountpath () {
   PATH="/bin:/usr/local/bin:/usr/bin:/usr/sbin:/sbin"
   [[ -d "$HOMEBREW_BIN" ]] && PATH="$HOMEBREW_BIN:$PATH"
   PATH="$CUSTOM_SCRIPTS:$PATH"
-  PATH="$GNUBIN_PATH:$PATH"
-  PATH="$JAVA_HOME/bin:$PATH"
-  PATH="$CARGO_BIN:$PATH"
-  PATH="$RUST_SRC_PATH:$PATH"
+  [[ -d "$GNUBIN_PATH" ]] && PATH="$GNUBIN_PATH:$PATH"
+  # unguarded these prepend a bare "/bin" when the variable is empty
+  [[ -n "$JAVA_HOME" ]] && PATH="$JAVA_HOME/bin:$PATH"
+  [[ -d "$CARGO_BIN" ]] && PATH="$CARGO_BIN:$PATH"
+  [[ -d "$RUST_SRC_PATH" ]] && PATH="$RUST_SRC_PATH:$PATH"
+  [[ -d ~/.docker/bin ]] && PATH="$PATH:$HOME/.docker/bin"
   export PATH
 }
 mountpath
 
 # manpath
-if [[ -d /opt/homebrew ]]; then
-  GNUMANPATH="/opt/homebrew/opt/coreutils/libexec/gnuman"
-else
-  GNUMANPATH="/usr/local/opt/coreutils/libexec/gnuman"
-fi
-MANPATH="$GNUMANPATH:$MANPATH"
-export MANPATH
+[[ -d "$GNUMANPATH" ]] && export MANPATH="$GNUMANPATH:$MANPATH"
 
 # node version manager
-
 export NVM_DIR="$HOME/.nvm"
 [[ -e $NVM_DIR/nvm.sh ]] && source $NVM_DIR/nvm.sh || true
-
-# The following lines were added by Docker Desktop to add commands to your PATH.
-export PATH="$PATH:/Users/service/.docker/bin"
-# End of Docker Desktop section.
-
-eval "$(/opt/homebrew/bin/brew shellenv zsh)"
-
