@@ -55,6 +55,6 @@ md() {
 }
 
 # }}}
-# tma: fzf tmux session picker (defined in dotfiles/tmux, non-Meta) {{{
+# tma: fzf tmux session picker (defined in dotfiles/tmux) {{{
 [[ -f ~/.tmux.d/tma.zsh ]] && source ~/.tmux.d/tma.zsh
 # }}}

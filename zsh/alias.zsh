@@ -33,8 +33,8 @@ alias dot='la $(find ~ -maxdepth 1 -type l)'
 
 # dotfiles
 alias r='~/.dotfiles/install.zsh'
-alias dot-push='cd ~/dotfiles && git bundle create ~/gdrive/dotfiles.bundle master'
-alias dot-pull='cd ~/dotfiles && git pull ~/gdrive/dotfiles.bundle master'
+alias dot-push='git -C ~/.dotfiles bundle create ${DOT_SYNC_DIR:-$HOME/gdrive}/dotfiles.bundle master'
+alias dot-pull='git -C ~/.dotfiles pull ${DOT_SYNC_DIR:-$HOME/gdrive}/dotfiles.bundle master'
 alias t='tmux new-session -A -s tmux -n shell'
 
 # dirs

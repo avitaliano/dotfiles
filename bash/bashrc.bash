@@ -54,8 +54,8 @@ else
 fi
 
 alias dot='la `find ~ -maxdepth 1 -type l`'
-alias dot-push='cd ~/dotfiles && git bundle create ~/gdrive/dotfiles.bundle master'
-alias dot-pull='cd ~/dotfiles && git pull ~/gdrive/dotfiles.bundle master'
+alias dot-push='git -C ~/.dotfiles bundle create ${DOT_SYNC_DIR:-$HOME/gdrive}/dotfiles.bundle master'
+alias dot-pull='git -C ~/.dotfiles pull ${DOT_SYNC_DIR:-$HOME/gdrive}/dotfiles.bundle master'
 
 alias tarc='tar -zcvf file.tar.gz'
 alias tarx='tar -zxvf'
@@ -115,9 +115,6 @@ md () {
 export PS1="${Cyan}\u${Red}@${Yellow}\h${Rst}:${Blue}\w${Purple}>${Rst} "
 
 # }}}
-# switch to zsh if available
-[[ -z "$ZSH_VERSION" && -x "$(command -v zsh)" ]] && exec zsh -l
-
 # user last step {{{
 
 LAST_STEP=~/.options/last-step.zsh
@@ -125,6 +122,8 @@ LAST_STEP=~/.options/last-step.zsh
 
 # }}}
 
-
 # Added by Antigravity CLI installer
 export PATH="$HOME/.local/bin:$PATH"
+
+# switch to zsh if available. keep last: exec replaces this shell.
+[[ -z "$ZSH_VERSION" && -x "$(command -v zsh)" ]] && exec zsh -l
