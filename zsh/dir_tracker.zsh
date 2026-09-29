@@ -17,9 +17,9 @@ pwd_hook() {
 
 
 show_and_choose(){
-  choice=$( tail -n +2 $DIR_HISTORY | cat - -b | fzf | awk '{print $2}' )
+  choice=$( tail -n +2 "$DIR_HISTORY" | cat -b | fzf | cut -f2- )
   if [ -n "$choice" ]; then
-    cd $choice
+    cd "$choice"
   fi
 }
 
