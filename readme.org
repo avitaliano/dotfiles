@@ -86,6 +86,14 @@ To check out what binds and plugins I use in this config, my [[https://github.co
 * TMUX custom binds
 checkout the [[https://github.com/ninrod/dotfiles/blob/master/tmux/keybinds.tmux][keybinds.tmux]] file for binding setup.
 
+* Shift+Enter sends instead of adding a newline (Claude Code, iTerm2 + tmux)
+tmux drops the Shift modifier, so apps only see Enter. Enabling tmux =extended-keys= does *not* fix it.
+The fix lives in iTerm2: map Shift+Enter to "Send Text: \n" in the default profile.
+#+BEGIN_SRC sh
+./scripts/terminal/iterm2-shift-enter.zsh   # then Cmd+Q and reopen iTerm2
+#+END_SRC
+Check: Settings → Profiles → Default → Keys → Key Mappings shows "⇧↩ Send Text \n".
+
 * LICENSE
 - [[https://www.gnu.org/licenses/gpl-3.0.en.html][GNU General Public License v3]]
 #+BEGIN_SRC text
