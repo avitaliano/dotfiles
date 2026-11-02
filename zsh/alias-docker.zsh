@@ -85,3 +85,6 @@ alias dclean='docker_remove_all && docker image prune'
 
 # list every docker alias
 alias dalias="alias | grep -E \"^d[a-z]*='?docker\" | sed 's/=/ => /' | sort"
+
+# apps in containers
+alias hermes='docker exec -it -u 10000 hermes hermes'   # hermes stack (~/docker/hermes); uid 10000 = its runtime user
