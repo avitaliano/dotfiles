@@ -49,3 +49,5 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Added by Antigravity CLI installer
 export PATH="$HOME/.local/bin:$PATH"
+
+[ -f ~/.config/local-settings.zsh ] && source ~/.config/local-settings.zsh
